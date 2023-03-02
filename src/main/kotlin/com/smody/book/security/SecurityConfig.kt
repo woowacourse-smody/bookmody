@@ -5,11 +5,13 @@ import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.web.SecurityFilterChain
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
 @Configuration
 @EnableWebSecurity
 class SecurityConfig(
-    private val principalOAuth2UserService: PrincipalOAuth2UserService
+    private val principalOAuth2UserService: PrincipalOAuth2UserService,
+    private val jwtAuthorizationFilter: JwtAuthorizationFilter
 ) {
 
     @Bean
@@ -34,6 +36,10 @@ class SecurityConfig(
                 it.userInfoEndpoint().userService(principalOAuth2UserService)
                 it.defaultSuccessUrl("/auth/login")
             }
+            .addFilterBefore(
+                jwtAuthorizationFilter,
+                UsernamePasswordAuthenticationFilter::class.java
+            )
 
             .build()
     }

@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
+import org.springframework.security.config.http.SessionCreationPolicy
 import org.springframework.security.web.SecurityFilterChain
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter
 
@@ -11,7 +12,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 class SecurityConfig(
     private val principalOAuth2UserService: PrincipalOAuth2UserService,
-    private val jwtAuthorizationFilter: JwtAuthorizationFilter
+    private val jwtAuthorizationFilter: JwtAuthorizationFilter,
+    private val oAuthLoginSuccessHandler: OAuthLoginSuccessHandler
 ) {
 
     @Bean
@@ -19,6 +21,9 @@ class SecurityConfig(
         return http
             .csrf {
                 it.disable()
+            }
+            .sessionManagement {
+                it.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
             }
             .formLogin {
                 it.disable()
@@ -34,8 +39,9 @@ class SecurityConfig(
 
             .oauth2Login {
                 it.userInfoEndpoint().userService(principalOAuth2UserService)
-                it.defaultSuccessUrl("/auth/login")
+                it.successHandler(oAuthLoginSuccessHandler)
             }
+
             .addFilterBefore(
                 jwtAuthorizationFilter,
                 UsernamePasswordAuthenticationFilter::class.java

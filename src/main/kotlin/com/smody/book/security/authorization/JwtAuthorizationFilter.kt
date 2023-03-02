@@ -1,6 +1,10 @@
-package com.smody.book.security
+package com.smody.book.security.authorization
 
 import com.smody.book.member.domain.MemberRepository
+import com.smody.book.security.OAuthPrincipal
+import com.smody.book.security.SecurityUtil
+import com.smody.book.security.support.existBearerToken
+import com.smody.book.security.support.extractBearerToken
 import com.smody.book.security.jwt.JwtTokenProvider
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
@@ -22,16 +26,16 @@ class JwtAuthorizationFilter(
         if (request.existBearerToken()) {
             val accessToken = request.extractBearerToken()
             if (jwtTokenProvider.isValidToken(accessToken)) {
-                authenticate(accessToken)
+                authorize(accessToken)
             }
         }
         chain.doFilter(request, response)
     }
 
-    private fun authenticate(accessToken: String) {
+    private fun authorize(accessToken: String) {
         val memberId = jwtTokenProvider.getId(accessToken)
         if (memberRepository.existsById(memberId)) {
-            SecurityUtil.authenticate(OAuthPrincipal(memberId, accessToken))
+            SecurityUtil.authorize(OAuthPrincipal(memberId, accessToken))
         }
     }
 

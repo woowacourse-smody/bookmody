@@ -1,7 +1,8 @@
-package com.smody.book.security
+package com.smody.book.security.authentication
 
 import com.smody.book.member.domain.Member
 import com.smody.book.member.domain.MemberRepository
+import com.smody.book.security.OAuthPrincipal
 import com.smody.book.security.jwt.JwtTokenProvider
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest

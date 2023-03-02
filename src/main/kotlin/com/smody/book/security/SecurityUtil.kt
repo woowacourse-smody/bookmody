@@ -6,12 +6,12 @@ import org.springframework.security.core.context.SecurityContextHolder
 class SecurityUtil {
 
     companion object {
-        fun authenticate(principalDetails: OAuthPrincipal) {
+        fun authorize(oAuthPrincipal: OAuthPrincipal) {
             val context = SecurityContextHolder.createEmptyContext()
             context.authentication = UsernamePasswordAuthenticationToken(
-                principalDetails,
+                oAuthPrincipal,
                 null,
-                principalDetails.authorities
+                oAuthPrincipal.authorities
             )
             SecurityContextHolder.setContext(context)
         }

@@ -6,14 +6,14 @@ import java.util.*
 
 private const val BEARER_TYPE: String = "Bearer"
 
-fun HttpServletRequest.extractBearerToken(): String {
+fun HttpServletRequest.extractBearerToken(): String? {
     if (this.existBearerToken()) {
         val token = this.getHeader(HttpHeaders.AUTHORIZATION)
         return token.substring(BEARER_TYPE.length).trim { it <= ' ' }
     }
-    return ""
+    return null
 }
-fun HttpServletRequest.existBearerToken(): Boolean {
+private fun HttpServletRequest.existBearerToken(): Boolean {
     val token = this.getHeader(HttpHeaders.AUTHORIZATION)
     return token != null
             && token.lowercase(Locale.getDefault()).startsWith(BEARER_TYPE.lowercase())

@@ -1,8 +1,7 @@
-package com.smody.book.security.authentication
+package com.smody.book.auth.security.authentication
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.smody.book.auth.security.OAuthPrincipal
-import com.smody.book.auth.security.authentication.OAuthLoginSuccessHandler
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.junit.jupiter.api.DisplayName

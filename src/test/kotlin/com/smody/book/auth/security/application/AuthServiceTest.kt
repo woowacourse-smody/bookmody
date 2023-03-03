@@ -1,4 +1,4 @@
-package com.smody.book.security.application
+package com.smody.book.auth.security.application
 
 import com.smody.book.DatabaseCleaner
 import com.smody.book.auth.application.AuthService

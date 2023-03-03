@@ -25,14 +25,17 @@ class JwtTokenProvider(
             .compact()
     }
 
-    fun getId(token: String): Long {
+    fun extractIdIfValid(token: String): Long? {
+        if (!isValidToken(token)) {
+            return null
+        }
         return parseClaimsJws(token)
             .body
             .get("id", Integer::class.java)
             .toLong()
     }
 
-    fun isValidToken(token: String): Boolean {
+    private fun isValidToken(token: String): Boolean {
         return try {
             !parseClaimsJws(token).body.expiration.before(Date())
         } catch (e: JwtException) {

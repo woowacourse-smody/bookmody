@@ -1,7 +1,7 @@
 package com.smody.book.auth.security.authentication
 
 import com.smody.book.auth.security.OAuthPrincipal
-import com.smody.book.auth.application.LoginService
+import com.smody.book.auth.application.AuthService
 import com.smody.book.auth.dto.LoginRequest
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
@@ -10,12 +10,12 @@ import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
 @Service
-class PrincipalOAuth2UserService(private val loginService: LoginService) : DefaultOAuth2UserService() {
+class PrincipalOAuth2UserService(private val authService: AuthService) : DefaultOAuth2UserService() {
 
     @Transactional
     override fun loadUser(userRequest: OAuth2UserRequest?): OAuth2User {
         val oAuth2User = super.loadUser(validateUserRequestNull(userRequest))
-        val loginResponse = loginService.login(oAuth2User.toLoginRequest())
+        val loginResponse = authService.login(oAuth2User.toLoginRequest())
         return OAuthPrincipal(loginResponse.memberId, loginResponse.accessToken)
     }
 

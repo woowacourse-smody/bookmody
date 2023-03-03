@@ -1,9 +1,9 @@
 package com.smody.book.auth.security.authorization
 
-import com.smody.book.member.domain.MemberRepository
+import com.smody.book.auth.application.AuthService
+import com.smody.book.auth.dto.AuthorizationRequest
 import com.smody.book.auth.security.OAuthPrincipal
 import com.smody.book.auth.support.extractBearerToken
-import com.smody.book.auth.jwt.JwtTokenProvider
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
@@ -13,35 +13,22 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class JwtAuthorizationFilter(
-    private val memberRepository: MemberRepository,
-    private val jwtTokenProvider: JwtTokenProvider
-) : OncePerRequestFilter(
-) {
+class JwtAuthorizationFilter(private val authService: AuthService) : OncePerRequestFilter() {
     override fun doFilterInternal(
         request: HttpServletRequest,
         response: HttpServletResponse,
         chain: FilterChain
     ) {
         request.extractBearerToken()?.let { token ->
-            authorizeIfTokenValid(token)
+            val authorization = authService.authorize(AuthorizationRequest(token))
+            if (authorization.isAuthorized) {
+                configurerSecurityContext(OAuthPrincipal(authorization.memberId!!, token))
+            }
         }
         chain.doFilter(request, response)
     }
 
-    private fun authorizeIfTokenValid(token: String) {
-        if (jwtTokenProvider.isValidToken(token)) {
-            authorizeIfMemberExist(token, jwtTokenProvider.getId(token))
-        }
-    }
-
-    private fun authorizeIfMemberExist(token: String, memberId: Long) {
-        if (memberRepository.existsById(memberId)) {
-            authorize(OAuthPrincipal(memberId, token))
-        }
-    }
-
-    private fun authorize(oAuthPrincipal: OAuthPrincipal) {
+    private fun configurerSecurityContext(oAuthPrincipal: OAuthPrincipal) {
         val context = SecurityContextHolder.createEmptyContext()
         context.authentication = UsernamePasswordAuthenticationToken(
             oAuthPrincipal,

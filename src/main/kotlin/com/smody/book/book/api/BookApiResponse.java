@@ -1,4 +1,4 @@
-package com.smody.book.book.api.response;
+package com.smody.book.book.api;
 
 public interface BookApiResponse {
 

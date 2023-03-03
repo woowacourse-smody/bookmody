@@ -1,5 +1,6 @@
-package com.smody.book.book.api.response;
+package com.smody.book.book.api.naver;
 
+import com.smody.book.book.api.BookApiResponse;
 import lombok.Getter;
 
 @Getter

@@ -1,4 +1,4 @@
-package com.smody.book.book.api.response;
+package com.smody.book.book.api.naver;
 
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class NaverApiResponse {
+public class NaverResponse {
 
     private String lastBuildDate;
     private int total;

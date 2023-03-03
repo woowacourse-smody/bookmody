@@ -2,7 +2,7 @@ package com.smody.book.security.authentication
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.smody.book.security.OAuthPrincipal
-import com.smody.book.security.dto.TokenResponse
+import com.smody.book.security.dto.LoginResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.Authentication
@@ -21,7 +21,7 @@ class OAuthLoginSuccessHandler(
         val oAuthPrincipal = authentication.principal as OAuthPrincipal
         response.contentType = "application/json;charset=UTF-8"
         val writer = response.writer
-        writer.println(objectMapper.writeValueAsString(TokenResponse(oAuthPrincipal)))
+        writer.println(objectMapper.writeValueAsString(LoginResponse(oAuthPrincipal)))
         writer.flush()
     }
 }

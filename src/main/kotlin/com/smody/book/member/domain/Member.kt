@@ -8,7 +8,7 @@ import jakarta.persistence.Id
 @Entity
 class Member(
     val email: String,
-    val profile: String
+    val picture: String
 ) {
 
     @Id

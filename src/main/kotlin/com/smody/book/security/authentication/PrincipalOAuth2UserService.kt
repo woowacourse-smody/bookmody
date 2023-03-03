@@ -37,7 +37,7 @@ class PrincipalOAuth2UserService(
     }
 
     private fun join(oAuth2User: OAuth2User, email: String): Member {
-        val profile = oAuth2User.getAttribute<String>("picture")!!
-        return memberRepository.save(Member(email, profile))
+        val picture = oAuth2User.getAttribute<String>("picture")!!
+        return memberRepository.save(Member(email, picture))
     }
 }

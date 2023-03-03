@@ -17,8 +17,7 @@ public class BookController {
 
     @GetMapping("/books")
     public ResponseEntity<List<BookResponse>> searchBooks(@RequestParam(required = false) String title) {
-        List<BookResponse> bookResponses = bookService.findAllByTitle(title);;
-
+        List<BookResponse> bookResponses = bookService.findAllByTitle(title);
         return ResponseEntity.ok(bookResponses);
     }
 }

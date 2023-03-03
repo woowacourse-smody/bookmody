@@ -1,9 +1,9 @@
-package com.smody.book.security.application
+package com.smody.book.auth.application
 
 import com.smody.book.member.domain.MemberRepository
-import com.smody.book.security.dto.LoginRequest
-import com.smody.book.security.dto.LoginResponse
-import com.smody.book.security.jwt.JwtTokenProvider
+import com.smody.book.auth.dto.LoginRequest
+import com.smody.book.auth.dto.LoginResponse
+import com.smody.book.auth.jwt.JwtTokenProvider
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

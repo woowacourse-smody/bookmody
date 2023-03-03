@@ -1,4 +1,4 @@
-package com.smody.book.security.dto
+package com.smody.book.auth.dto
 
 import com.smody.book.member.domain.Member
 

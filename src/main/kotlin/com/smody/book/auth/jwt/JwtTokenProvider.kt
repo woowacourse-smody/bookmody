@@ -1,4 +1,4 @@
-package com.smody.book.security.jwt
+package com.smody.book.auth.jwt
 
 import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys

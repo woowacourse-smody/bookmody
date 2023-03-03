@@ -1,8 +1,9 @@
 package com.smody.book.security.application
 
+import com.smody.book.auth.application.LoginService
 import com.smody.book.member.domain.Member
 import com.smody.book.member.domain.MemberRepository
-import com.smody.book.security.dto.LoginRequest
+import com.smody.book.auth.dto.LoginRequest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.DisplayName

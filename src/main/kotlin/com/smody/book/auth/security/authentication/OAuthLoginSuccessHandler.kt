@@ -1,8 +1,8 @@
-package com.smody.book.security.authentication
+package com.smody.book.auth.security.authentication
 
 import com.fasterxml.jackson.databind.ObjectMapper
-import com.smody.book.security.OAuthPrincipal
-import com.smody.book.security.dto.LoginResponse
+import com.smody.book.auth.security.OAuthPrincipal
+import com.smody.book.auth.dto.LoginResponse
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.springframework.security.core.Authentication

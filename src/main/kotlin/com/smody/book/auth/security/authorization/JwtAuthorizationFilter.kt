@@ -1,9 +1,9 @@
-package com.smody.book.security.authorization
+package com.smody.book.auth.security.authorization
 
 import com.smody.book.member.domain.MemberRepository
-import com.smody.book.security.OAuthPrincipal
-import com.smody.book.security.support.extractBearerToken
-import com.smody.book.security.jwt.JwtTokenProvider
+import com.smody.book.auth.security.OAuthPrincipal
+import com.smody.book.auth.support.extractBearerToken
+import com.smody.book.auth.jwt.JwtTokenProvider
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse

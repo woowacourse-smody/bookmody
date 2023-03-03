@@ -1,8 +1,8 @@
-package com.smody.book.security
+package com.smody.book.auth.security
 
-import com.smody.book.security.authentication.OAuthLoginSuccessHandler
-import com.smody.book.security.authentication.PrincipalOAuth2UserService
-import com.smody.book.security.authorization.JwtAuthorizationFilter
+import com.smody.book.auth.security.authentication.OAuthLoginSuccessHandler
+import com.smody.book.auth.security.authentication.PrincipalOAuth2UserService
+import com.smody.book.auth.security.authorization.JwtAuthorizationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.security.config.annotation.web.builders.HttpSecurity

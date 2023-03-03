@@ -1,4 +1,4 @@
-package com.smody.book.security.support
+package com.smody.book.auth.support
 
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.http.HttpHeaders

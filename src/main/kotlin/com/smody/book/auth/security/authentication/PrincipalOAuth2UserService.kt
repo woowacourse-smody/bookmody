@@ -1,8 +1,8 @@
-package com.smody.book.security.authentication
+package com.smody.book.auth.security.authentication
 
-import com.smody.book.security.OAuthPrincipal
-import com.smody.book.security.application.LoginService
-import com.smody.book.security.dto.LoginRequest
+import com.smody.book.auth.security.OAuthPrincipal
+import com.smody.book.auth.application.LoginService
+import com.smody.book.auth.dto.LoginRequest
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest
 import org.springframework.security.oauth2.core.user.OAuth2User

@@ -1,15 +1,8 @@
-package com.smody.book.book.api.kakao;
+package com.smody.book.book.api.kakao
 
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-public class KakaoResponse {
-
-    private KakaoResponseMeta meta;
-    private List<KakaoBookApiResponse> documents;
-}
+data class KakaoResponse (
+    @JsonProperty("meta") val meta: KakaoResponseMeta,
+    @JsonProperty("documents") val documents: List<KakaoBookApiResponse>
+)

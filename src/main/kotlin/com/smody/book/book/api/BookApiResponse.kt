@@ -1,16 +1,10 @@
-package com.smody.book.book.api;
+package com.smody.book.book.api
 
-public interface BookApiResponse {
-
-    String title();
-
-    String image();
-
-    String author();
-
-    String pubdate();
-
-    String publisher();
-
-    String description();
+interface BookApiResponse {
+    fun title(): String
+    fun image(): String
+    fun author(): String
+    fun pubdate(): String
+    fun publisher(): String
+    fun description(): String
 }

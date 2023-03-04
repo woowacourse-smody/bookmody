@@ -1,23 +1,21 @@
-package com.smody.book.book.controller;
+package com.smody.book.book.controller
 
-import com.smody.book.book.dto.BookResponse;
-import com.smody.book.book.service.BookService;
-import java.util.List;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController
+import lombok.RequiredArgsConstructor
+import com.smody.book.book.service.BookService
+import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.RequestParam
+import org.springframework.http.ResponseEntity
+import com.smody.book.book.dto.BookResponse
 
 @RestController
 @RequiredArgsConstructor
-public class BookController {
-
-    private final BookService bookService;
-
+class BookController (
+    private val bookService: BookService
+) {
     @GetMapping("/books")
-    public ResponseEntity<List<BookResponse>> searchBooks(@RequestParam(required = false) String title) {
-        List<BookResponse> bookResponses = bookService.findAllByTitle(title);
-        return ResponseEntity.ok(bookResponses);
+    fun searchBooks(@RequestParam(required = false) title: String): ResponseEntity<List<BookResponse>> {
+        val bookResponses = bookService.findAllByTitle(title)
+        return ResponseEntity.ok(bookResponses)
     }
 }

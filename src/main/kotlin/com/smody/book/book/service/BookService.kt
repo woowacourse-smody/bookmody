@@ -1,28 +1,32 @@
-package com.smody.book.book.service;
+package com.smody.book.book.service
 
-import com.smody.book.book.api.BookApi;
-import com.smody.book.book.api.BookApiResponse;
-import com.smody.book.book.dto.BookResponse;
-import java.util.List;
-import java.util.stream.Collectors;
-import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RestController
+import lombok.RequiredArgsConstructor
+import com.smody.book.book.api.BookApi
+import com.smody.book.book.dto.BookResponse
+import com.smody.book.book.api.BookApiResponse
+import java.util.stream.Collectors
 
 @RestController
 @RequiredArgsConstructor
-public class BookService {
-
-    private final BookApi bookApi;
-
-    public List<BookResponse> findAllByTitle(String title) {
-        return convertToResponse(bookApi.findAllByTitle(title));
+class BookService (
+        private val bookApi: BookApi
+) {
+    fun findAllByTitle(title: String): List<BookResponse> {
+        val convertToResponse = convertToResponse(bookApi.findAllByTitle(title))
+        return convertToResponse
     }
 
-    private List<BookResponse> convertToResponse(List<BookApiResponse> apiResponse) {
+
+    private fun convertToResponse(apiResponse: List<BookApiResponse>): List<BookResponse> {
         return apiResponse.stream()
-                .map(item -> new BookResponse(item.title(), item.image(), item.author(),
-                        item.pubdate(),
-                        item.publisher(), item.description()))
-                .collect(Collectors.toList());
+            .map { item: BookApiResponse ->
+                BookResponse(
+                    item.title(), item.image(), item.author(),
+                    item.pubdate(),
+                    item.publisher(), item.description()
+                )
+            }
+            .collect(Collectors.toList())
     }
 }

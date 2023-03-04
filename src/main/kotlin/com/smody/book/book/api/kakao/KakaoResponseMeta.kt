@@ -1,15 +1,9 @@
-package com.smody.book.book.api.kakao;
+package com.smody.book.book.api.kakao
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-public class KakaoResponseMeta {
-
-    private Boolean is_end;
-    private int pageable_count;
-    private int total_count;
-}
+data class KakaoResponseMeta(
+    @JsonProperty("is_end") val is_end: Boolean,
+    @JsonProperty("pageable_count") val pageable_count: Int,
+    @JsonProperty("total_count") val total_count: Int
+)

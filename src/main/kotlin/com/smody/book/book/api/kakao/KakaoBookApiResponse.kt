@@ -1,56 +1,46 @@
-package com.smody.book.book.api.kakao;
+package com.smody.book.book.api.kakao
 
-import com.smody.book.book.api.BookApiResponse;
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty
+import lombok.NoArgsConstructor
+import lombok.AllArgsConstructor
+import com.smody.book.book.api.BookApiResponse
+import lombok.Getter
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-public class KakaoBookApiResponse implements BookApiResponse {
-
-    private List<String> authors;
-    private String contents;
-    private String datetime;
-    private String isbn;
-    private int price;
-    private String publisher;
-    private int sale_price;
-    private String status;
-    private String thumbnail;
-    private String title;
-    private List<String> translators;
-    private String url;
-
-    @Override
-    public String title() {
-        return title;
+data class KakaoBookApiResponse(
+    @JsonProperty("authors") val authors: List<String>,
+    @JsonProperty("contents") val contents: String,
+    @JsonProperty("datetime") val datetime: String,
+    @JsonProperty("isbn") val isbn: String,
+    @JsonProperty("price") val price: Int,
+    @JsonProperty("publisher") val publisher: String,
+    @JsonProperty("sale_price") val sale_price: Int,
+    @JsonProperty("status") val status: String,
+    @JsonProperty("thumbnail") val thumbnail: String,
+    @JsonProperty("title") val title: String,
+    @JsonProperty("translators") val translators: List<String>,
+    @JsonProperty("url") val url: String
+) : BookApiResponse {
+    override fun title(): String {
+        return title
     }
 
-    @Override
-    public String image() {
-        return thumbnail;
+    override fun image(): String {
+        return thumbnail
     }
 
-    @Override
-    public String author() {
-        return authors.toString();
+    override fun author(): String {
+        return authors.toString()
     }
 
-    @Override
-    public String pubdate() {
-        return datetime;
+    override fun pubdate(): String {
+        return datetime
     }
 
-    @Override
-    public String publisher() {
-        return publisher;
+    override fun publisher(): String {
+        return publisher
     }
 
-    @Override
-    public String description() {
-        return contents;
+    override fun description(): String {
+        return contents
     }
 }

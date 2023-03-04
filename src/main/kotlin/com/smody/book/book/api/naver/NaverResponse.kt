@@ -1,18 +1,11 @@
-package com.smody.book.book.api.naver;
+package com.smody.book.book.api.naver
 
-import java.util.List;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonProperty
 
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-public class NaverResponse {
-
-    private String lastBuildDate;
-    private int total;
-    private int start;
-    private int display;
-    private List<NaverBookApiResponse> items;
-}
+data class NaverResponse (
+    @JsonProperty("lastBuildDate") val lastBuildDate: String,
+    @JsonProperty("total") val total: Int,
+    @JsonProperty("start") val start: Int,
+    @JsonProperty("display") val display: Int,
+    @JsonProperty("items") val items: List<NaverBookApiResponse>
+)

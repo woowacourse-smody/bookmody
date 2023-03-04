@@ -1,48 +1,41 @@
-package com.smody.book.book.api.naver;
+package com.smody.book.book.api.naver
 
-import com.smody.book.book.api.BookApiResponse;
-import lombok.Getter;
+import com.fasterxml.jackson.annotation.JsonProperty
+import com.smody.book.book.api.BookApiResponse
 
-@Getter
-public class NaverBookApiResponse implements BookApiResponse {
+class NaverBookApiResponse(
+    @JsonProperty("title") val title: String,
+    @JsonProperty("link") val link: String,
+    @JsonProperty("image") val image: String,
+    @JsonProperty("discount") val discount: Int,
+    @JsonProperty("publisher") val publisher: String,
+    @JsonProperty("pubdate") val pubdate: String,
+    @JsonProperty("author") val author: String,
+    @JsonProperty("isbn") val isbn: String,
+    @JsonProperty("description") val description: String,
+) : BookApiResponse {
 
-    private String title;
-    private String link;
-    private String image;
-    private int discount;
-    private String publisher;
-    private String pubdate;
-    private String author;
-    private String isbn;
-    private String description;
-
-    @Override
-    public String title() {
-        return title;
+    override fun title(): String {
+        return title
     }
 
-    @Override
-    public String image() {
-        return image;
+    override fun image(): String {
+        return image
     }
 
-    @Override
-    public String author() {
-        return author;
+    override fun author(): String {
+        return author
     }
 
-    @Override
-    public String pubdate() {
-        return pubdate;
+    override fun pubdate(): String {
+        return pubdate
     }
 
-    @Override
-    public String publisher() {
-        return publisher;
+    override fun publisher(): String {
+        return publisher
     }
 
-    @Override
-    public String description() {
-        return description;
+    override fun description(): String {
+        return description
     }
 }

@@ -1,54 +1,42 @@
-package com.smody.book.book.api.naver;
+package com.smody.book.book.api.naver
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.smody.book.book.api.ApiClient;
-import com.smody.book.book.api.BookApi;
-import com.smody.book.book.api.BookApiResponse;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Component;
+import com.fasterxml.jackson.core.JsonProcessingException
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.smody.book.book.api.ApiClient
+import com.smody.book.book.api.BookApi
+import com.smody.book.book.api.BookApiResponse
+import org.springframework.beans.factory.annotation.Value
+import org.springframework.context.annotation.Primary
+import org.springframework.stereotype.Component
+import java.util.*
+import java.util.stream.Collectors
 
 @Component
-public class NaverBookApi implements BookApi {
-
-    private final String uri;
-    private final String clientId;
-    private final String clientSecret;
-
-    public NaverBookApi(
-            @Value("${api.naver.client-id}") String clientId,
-            @Value("${api.naver.client-secret}") String clientSecret,
-            @Value("${api.naver.uri}") String uri) {
-        this.uri = uri;
-        this.clientId = clientId;
-        this.clientSecret = clientSecret;
+class NaverBookApi(
+    @param:Value("\${api.naver.client-id}") private val clientId: String,
+    @param:Value("\${api.naver.client-secret}") private val clientSecret: String,
+    @param:Value("\${api.naver.uri}") private val uri: String
+) : BookApi {
+    override fun findAllByTitle(title: String): List<BookApiResponse> {
+        val client = ApiClient.builder()
+            .uri(uri)
+            .addParam("query", title)
+            .addHeader("X-Naver-Client-Id", clientId)
+            .addHeader("X-Naver-Client-Secret", clientSecret)
+            .build()
+        val response = client.get()
+        return parseToBookResponse(response.body.toString())
     }
 
-    @Override
-    public List<BookApiResponse> findAllByTitle(String title) {
-        ApiClient client = ApiClient.builder()
-                .uri(uri)
-                .addParam("query", title)
-                .addHeader("X-Naver-Client-Id", clientId)
-                .addHeader("X-Naver-Client-Secret", clientSecret)
-                .build();
-        ResponseEntity<String> response = client.get();
-        return parseToBookResponse(response.getBody());
-    }
-
-    private List<BookApiResponse> parseToBookResponse(String responseBody) {
-        List<NaverBookApiResponse> naverResponsBooks = new ArrayList<>();
+    private fun parseToBookResponse(responseBody: String): List<BookApiResponse> {
+        var naverResponseBooks: List<NaverBookApiResponse> = ArrayList()
         try {
-            naverResponsBooks = new ObjectMapper().readValue(responseBody, NaverResponse.class).getItems();
-        } catch (JsonProcessingException e) {
-            e.printStackTrace();
+            naverResponseBooks = ObjectMapper().readValue(responseBody, NaverResponse::class.java).items
+        } catch (e: JsonProcessingException) {
+            e.printStackTrace()
         }
-        return naverResponsBooks.stream()
-                .map(naverResponseBook -> (BookApiResponse) naverResponseBook)
-                .collect(Collectors.toList());
+        return naverResponseBooks.stream()
+            .map { naverResponseBook: NaverBookApiResponse -> naverResponseBook }
+            .collect(Collectors.toList())
     }
 }

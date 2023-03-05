@@ -5,6 +5,7 @@ import com.smody.book.auth.security.authentication.PrincipalOAuth2UserService
 import com.smody.book.auth.security.authorization.JwtAuthorizationFilter
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
+import org.springframework.http.HttpStatus
 import org.springframework.security.config.annotation.web.builders.HttpSecurity
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity
 import org.springframework.security.config.http.SessionCreationPolicy
@@ -49,6 +50,10 @@ class SecurityConfig(
                 jwtAuthorizationFilter,
                 UsernamePasswordAuthenticationFilter::class.java
             )
+
+            .exceptionHandling {
+                it.authenticationEntryPoint { _, res, _ -> res.status = HttpStatus.UNAUTHORIZED.value() }
+            }
 
             .build()
     }

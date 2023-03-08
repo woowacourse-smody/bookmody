@@ -1,32 +1,26 @@
 package com.smody.book.book.service
 
-import org.springframework.web.bind.annotation.RestController
-import lombok.RequiredArgsConstructor
 import com.smody.book.book.api.BookApi
-import com.smody.book.book.dto.BookResponse
 import com.smody.book.book.api.BookApiResponse
-import java.util.stream.Collectors
+import com.smody.book.book.dto.BookResponse
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequiredArgsConstructor
-class BookService (
-        private val bookApi: BookApi
+class BookService(
+    @Qualifier("naver") private val bookApi: BookApi
 ) {
     fun findAllByTitle(title: String): List<BookResponse> {
-        val convertToResponse = convertToResponse(bookApi.findAllByTitle(title))
-        return convertToResponse
+        return convertToResponse(bookApi.findAllByTitle(title))
     }
 
-
     private fun convertToResponse(apiResponse: List<BookApiResponse>): List<BookResponse> {
-        return apiResponse.stream()
-            .map { item: BookApiResponse ->
-                BookResponse(
-                    item.title(), item.image(), item.author(),
-                    item.pubdate(),
-                    item.publisher(), item.description()
-                )
-            }
-            .collect(Collectors.toList())
+        return apiResponse.map { item ->
+            BookResponse(
+                item.title(), item.image(), item.author(),
+                item.pubdate(),
+                item.publisher(), item.description()
+            )
+        }
     }
 }

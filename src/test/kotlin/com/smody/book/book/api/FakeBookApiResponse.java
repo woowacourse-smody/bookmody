@@ -21,31 +21,31 @@ public class FakeBookApiResponse implements BookApiResponse {
 
     @Override
     public String title() {
-        return null;
+        return title;
     }
 
     @Override
     public String image() {
-        return null;
+        return image;
     }
 
     @Override
     public String author() {
-        return null;
+        return author;
     }
 
     @Override
     public String pubdate() {
-        return null;
+        return pubdate;
     }
 
     @Override
     public String publisher() {
-        return null;
+        return publisher;
     }
 
     @Override
     public String description() {
-        return null;
+        return description;
     }
 }

@@ -1,16 +1,14 @@
 package com.smody.book.book.controller
 
-import org.springframework.web.bind.annotation.RestController
-import lombok.RequiredArgsConstructor
+import com.smody.book.book.dto.BookResponse
 import com.smody.book.book.service.BookService
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestParam
-import org.springframework.http.ResponseEntity
-import com.smody.book.book.dto.BookResponse
+import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@RequiredArgsConstructor
-class BookController (
+class BookController(
     private val bookService: BookService
 ) {
     @GetMapping("/books")

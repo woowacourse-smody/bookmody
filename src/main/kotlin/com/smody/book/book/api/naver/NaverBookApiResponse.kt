@@ -1,18 +1,17 @@
 package com.smody.book.book.api.naver
 
-import com.fasterxml.jackson.annotation.JsonProperty
 import com.smody.book.book.api.BookApiResponse
 
 class NaverBookApiResponse(
-    @JsonProperty("title") val title: String,
-    @JsonProperty("link") val link: String,
-    @JsonProperty("image") val image: String,
-    @JsonProperty("discount") val discount: Int,
-    @JsonProperty("publisher") val publisher: String,
-    @JsonProperty("pubdate") val pubdate: String,
-    @JsonProperty("author") val author: String,
-    @JsonProperty("isbn") val isbn: String,
-    @JsonProperty("description") val description: String,
+    val title: String,
+    val link: String,
+    val image: String,
+    val discount: Int,
+    val publisher: String,
+    val pubdate: String,
+    val author: String,
+    val isbn: String,
+    val description: String,
 ) : BookApiResponse {
 
     override fun title(): String {

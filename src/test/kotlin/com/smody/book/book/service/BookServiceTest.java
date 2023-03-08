@@ -18,9 +18,9 @@ public class BookServiceTest {
     public void setUp() {
         bookService = new BookService(new FakeBookApi(
                 List.of(
-                        new FakeBookApiResponse("책1", "이미지1", "우석", "2023-01-01", "출판사", "설명"),
-                        new FakeBookApiResponse("책1", "이미지1", "우석", "2023-01-01", "출판사", "설명"),
-                        new FakeBookApiResponse("책1", "이미지1", "우석", "2023-01-01", "출판사", "설명")
+                        new FakeBookApiResponse("책1", "이미지1.png", "우석", "2023-01-01", "출판사", "설명"),
+                        new FakeBookApiResponse("책2", "이미지2.png", "우석", "2023-01-01", "출판사", "설명"),
+                        new FakeBookApiResponse("책3", "이미지3.png", "우석", "2023-01-01", "출판사", "설명")
                 )
         ));
     }

@@ -1,6 +1,6 @@
 package com.smody.book.book.dto
 
-data class BookResponse (
+data class BookResponse(
     val title: String,
     val image: String,
     val author: String,
